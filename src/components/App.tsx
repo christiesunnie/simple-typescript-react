@@ -5,8 +5,11 @@ import appStyles from './App.module.css';
 import PizzaList from './Pizza';
 import Cart from './Cart';
 import AppStateProvider from './AppState';
+import SpecialOffer from './SpecialOffer';
 
 const App = () => {
+  const specialOfferPizza = pizzas[2];
+
   const renderedPizzaList = pizzas.map((pizza) => {
     return <PizzaList key={pizza.id} pizza={pizza} />;
   });
@@ -18,7 +21,8 @@ const App = () => {
           <div className={appStyles.siteTitle}>Delicious Pizza</div>
           <Cart />
         </div>
-        <ul>{renderedPizzaList}</ul>
+        {specialOfferPizza && <SpecialOffer pizza={specialOfferPizza} />}
+        <ul className={appStyles.pizzaList}>{renderedPizzaList}</ul>
       </div>
     </AppStateProvider>
   );
