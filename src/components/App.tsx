@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import pizzas from '../data/pizzas.json';
 import appStyles from './App.module.css';
 
@@ -13,6 +13,19 @@ const App = () => {
   const renderedPizzaList = pizzas.map((pizza) => {
     return <PizzaList key={pizza.id} pizza={pizza} />;
   });
+
+  // An example to use useEffect over the Life Cycle methods
+  // useEffect(() => {
+  //   const listener = () => {
+  //     alert('Hello');
+  //   };
+
+  //   document.addEventListener('mousedown', listener);
+
+  //   return () => {
+  //     document.removeEventListener('mousedown', listener);
+  //   }
+  // }, []);
 
   return (
     <AppStateProvider>
