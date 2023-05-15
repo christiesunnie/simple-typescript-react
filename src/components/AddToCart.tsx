@@ -5,6 +5,7 @@ export interface AddToCartProps {
   addToCart: (item: Omit<CartItem, 'quantity'>) => void;
 }
 
+// Create a Higher Order Component
 function withAddToCart<OriginalProps extends AddToCartProps>(
   ChildComponent: React.ComponentType<OriginalProps>
 ) {
@@ -30,3 +31,20 @@ function withAddToCart<OriginalProps extends AddToCartProps>(
 }
 
 export default withAddToCart;
+
+// Create a Render Props Component
+
+export const WithAddToCartProps: React.FC<{
+  children: (props: AddToCartProps) => JSX.Element;
+}> = ({ children }) => {
+  const dispatch = useStateDispatch();
+
+  const addToCart: AddToCartProps['addToCart'] = (item) => {
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: { item },
+    });
+  };
+
+  return children({ addToCart });
+};
