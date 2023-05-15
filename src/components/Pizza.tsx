@@ -4,11 +4,11 @@ import pizzaStyles from './Pizza.module.css';
 // import { useSetState } from './AppState';
 
 import { Pizza } from '../types';
-import withAddToCart, { AddToCartProps } from './AddToCart';
+import withAddToCart, { AddToCartProps, useAddToCart } from './AddToCart';
 
-interface Props extends AddToCartProps {
-  pizza: Pizza;
-}
+// interface Props {
+//   pizza: Pizza;
+// }
 
 // const PizzaList: React.FC<Props> = ({ pizza }) => {
 //   // const setState = useSetState();
@@ -71,7 +71,41 @@ interface Props extends AddToCartProps {
 
 // export default PizzaList;
 
-const PizzaList: React.FC<Props> = ({ pizza, addToCart }) => {
+// Use Higher Order Component to render the component
+
+// interface Props extends AddToCartProps {
+//   pizza: Pizza;
+// }
+
+// const PizzaList: React.FC<Props> = ({ pizza, addToCart }) => {
+//   const handleAddToCartClick = () => {
+//     const { id, name, price } = pizza;
+//     addToCart({ id: id, name: name, price: price });
+//   };
+
+//   return (
+//     <li className={pizzaStyles.container}>
+//       <h2>{pizza.name}</h2>
+//       <p>{pizza.description}</p>
+//       <p>{pizza.price}</p>
+//       <button type='button' onClick={handleAddToCartClick}>
+//         Add to Cart
+//       </button>
+//     </li>
+//   );
+// };
+
+// export default withAddToCart(PizzaList);
+
+// use custom hook to render the component
+
+interface Props {
+  pizza: Pizza;
+}
+
+const PizzaList: React.FC<Props> = ({ pizza }) => {
+  const addToCart = useAddToCart();
+
   const handleAddToCartClick = () => {
     const { id, name, price } = pizza;
     addToCart({ id: id, name: name, price: price });
@@ -89,4 +123,4 @@ const PizzaList: React.FC<Props> = ({ pizza, addToCart }) => {
   );
 };
 
-export default withAddToCart(PizzaList);
+export default PizzaList;
